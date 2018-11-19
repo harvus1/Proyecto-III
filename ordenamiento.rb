@@ -162,3 +162,142 @@ def self.ordenarlista(valoresq, show)
     return {resultado: lista, pasos: paso}
     end
 end
+class Elemento
+    attr_accessor :valor, :siguiente
+    def initialize(valor)
+    @valor = valor
+    @siguiente = nil
+    end
+end
+
+class Pila
+    attr_accessor :tope
+    def initialize
+    @tope = nil
+end
+
+def insertar(valor)
+    l = Elemento.new(valor)
+    l.siguiente = @tope
+    @tope = l
+end
+
+def borrar
+    @tope = @tope.siguiente
+end
+
+def to_s
+        vector = ' '
+        tp = @tope
+        while tp != nil
+        if tp.siguiente != nil
+        vector += "#{tp.valor} --> "
+        else
+        vector += "#{tp.valor}"
+        end
+       tp = tp.siguiente
+end 
+return vector
+end
+end
+
+class Cola
+    attr_accessor :tope, :fondo
+    def initialize
+        @tope = nil
+        @fondo = nil
+    end
+
+def insertar(valor)
+    l = Elemento.new(valor)
+   tp = @tope
+    begin
+        if tp == nil
+        @tope = l
+        @fondo = l
+        break
+        elsif tp.siguiente == nil
+        tp.siguiente = l
+        @fondo = l
+    break
+       else
+        tp = tp.siguiente
+       end
+    end while tp != nil
+end
+
+def borrar
+    @tope = @tope.siguiente
+end
+
+    def to_s
+    vector = ''
+    tp = @tope
+        while tp != nil
+        if tp.siguiente != nil
+            vector += "#{tp.valor} --> "
+        else
+            vector += "#{tp.valor}"
+           end
+        tp = tp.siguiente
+   end
+    return vector
+end
+end
+
+class Lista
+    attr_accessor :tope, :fondo
+def initialize
+    @tope = nil
+    @fondo = nil
+end
+
+def insertar(valor)
+    l = Elemento.new(valor)
+    @fondo = l
+    @tope = l
+end
+
+def after(valor, referencia)
+    l = Elemento.new(valor)
+    tp = @tope
+    begin
+        if tp.valor == referencia
+        l.siguiente = tp.siguiente
+            tp.siguiente = l
+            @fondo = l if l.siguiente == nil
+            break
+         end
+        tp = tp.siguiente
+    end while tp != nil
+end
+
+def before(valor, referencia)
+    l = Elemento.new(valor)
+    tp = @tope
+   begin
+        if tp.valor == referencia
+        after(tp.valor, tp.valor)
+        tp.valor = valor
+        break
+        end while tp != nil
+        tp = tp.siguiente
+    end
+end
+
+def to_s
+        vector = ''
+        tp = @tope
+        while tp != nil
+        if tp.siguiente != nil
+                vector += "#{tp.valor} --> "
+         else
+                vector += "#{tp.valor}"
+        end
+    tp = tp.siguiente
+    end
+    return vector
+end
+end
+           
+           

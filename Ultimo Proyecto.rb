@@ -1,13 +1,18 @@
 def limpiar_pantalla
     system ('clear')
 end
+
 def ordenar_lista(lista, valor)
+
+
     for x in 0..valor.size-1 
         a=valor[x]
         elemento={
             valor: a,
             siguiente: nil,
         }
+    
+
     if lista[:vacia]==true
     lista[:tope]=elemento
     lista[:fondo]=elemento
@@ -105,6 +110,52 @@ end
 end
 end
 
+def ordenarp(pila, valor)
+
+
+    for x in 0..valor.size-1 
+        a=valor[x]
+        elemento={
+            valor: a,
+            siguiente: nil,
+        }
+    
+
+    if pila[:vacia]==true
+    pila[:tope]=elemento
+    pila[:vacia]=false
+    pila[:tamaño]+=1
+    
+    else
+
+    if a<pila[:tope][:valor]
+    auxt=pila[:tope]
+    elemento[:siguiente]=auxt
+    pila[:tope]=elemento
+    pila[:tamaño]+=1
+
+    else
+
+    medios=pila[:tope]
+    pila[:tamaño]=pila[:tamaño]+1
+    antes=nil
+    
+    bole = false
+    while bole == false
+    if a<medios[:valor]
+    elemento[:siguiente]=medios
+    antes[:siguiente]=elemento
+    bole = true
+    end
+    antes=medios
+    medios=medios[:siguiente]
+    end
+
+
+end    
+end
+end
+end
 
 
 limpiar_pantalla()
@@ -128,6 +179,7 @@ puts ''
         puts '                              ------'
         puts 'METODO MAS EFICIENTE:        |LISTAS|'
         puts '                              ------'
+    end
 
     if opcion == 3
         limpiar_pantalla()
@@ -180,48 +232,35 @@ puts ''
     end
 
     if opcion == 2
-        #################
- print 'Inserte Un Numero: '
-    n = gets.chomp.to_i
-    elemento = {
-        valor: n,
-        siguiente: nil
-    }
-    if pila[:esta_vacia]
-        pila[:tope] = elemento
-        pila [:esta_vacia] = false
-    else 
-        tope = pila[:tope]
-        elemento[:siguiente] = tope
-        pila[:tope] = elemento
-    end
-end
-
-def mostrarp (pila)
-        limpiar()
-        elemento = pila[:tope]
-        while elemento[:siguiente] != nil
-            nuevo_elemento = elemento[:siguiente]
-            elemento = nuevo_elemento
-            puts elemento[:valor]
-        end while elemento[:siguiente] != nil
+        pila  = {
+            tope: nil,
+            vacia: true,
+            tamaño: 0
+        }
+        
+        puts "Ingrese Valores (SEPARADADOS POR UN ESPACIO):"
+        aux = gets.chomp
+        valor = aux.split(' ').map(&:to_i)
+        
+        ordenarp(pila, valor)
+        
+        as = pila[:tope]
+        while as[:siguiente] != nil
+        puts as[:valor]
+        as = as[:siguiente]
+        end
+        puts as[:valor]
         gets
-end
-
-def eliminarp (pila)
-
-    limpiar()    
-    aux = pila[:tope]
-    aux = aux[:siguiente]
-    pila[:tope] = nil
-    pila[:tope] = aux 
-
-end
-    
-    ################33
+        limpiar_pantalla()
     end
+
+    
+
 end
-end
+
+
+    
+
 
 
     

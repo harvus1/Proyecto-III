@@ -1,18 +1,13 @@
 def limpiar_pantalla
     system ('clear')
 end
-
 def ordenar_lista(lista, valor)
-
-
     for x in 0..valor.size-1 
         a=valor[x]
         elemento={
             valor: a,
             siguiente: nil,
         }
-    
-
     if lista[:vacia]==true
     lista[:tope]=elemento
     lista[:fondo]=elemento
@@ -185,7 +180,45 @@ puts ''
     end
 
     if opcion == 2
+        #################
+ print 'Inserte Un Numero: '
+    n = gets.chomp.to_i
+    elemento = {
+        valor: n,
+        siguiente: nil
+    }
+    if pila[:esta_vacia]
+        pila[:tope] = elemento
+        pila [:esta_vacia] = false
+    else 
+        tope = pila[:tope]
+        elemento[:siguiente] = tope
+        pila[:tope] = elemento
+    end
+end
 
+def mostrarp (pila)
+        limpiar()
+        elemento = pila[:tope]
+        while elemento[:siguiente] != nil
+            nuevo_elemento = elemento[:siguiente]
+            elemento = nuevo_elemento
+            puts elemento[:valor]
+        end while elemento[:siguiente] != nil
+        gets
+end
+
+def eliminarp (pila)
+
+    limpiar()    
+    aux = pila[:tope]
+    aux = aux[:siguiente]
+    pila[:tope] = nil
+    pila[:tope] = aux 
+
+end
+    
+    ################33
     end
 end
 end
